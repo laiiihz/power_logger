@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
+import 'package:pretty_json/pretty_json.dart';
 
 class DioResponseView extends StatefulWidget {
   final Response data;
@@ -51,6 +53,16 @@ class _DioResponseViewState extends State<DioResponseView> {
           );
   }
 
+  _buildData() {
+    return BoxView(
+      title: Text('Params'),
+      child: HighlightView(
+        prettyJson(widget.data.data.toString()),
+        language: 'json',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +87,7 @@ class _DioResponseViewState extends State<DioResponseView> {
           TitleView(title: Text('Response')),
           _buildMap(widget.data.headers.map),
           _buildStatus(),
+          _buildData(),
         ],
       ),
     );

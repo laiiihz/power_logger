@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   dio: ^3.0.10
   animations: ^1.1.2
+  pretty_json: ^1.1.0
+  flutter_highlight: ^0.6.0
 
 dev_dependencies:
   flutter_test:

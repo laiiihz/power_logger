@@ -6,7 +6,7 @@ class TableView extends StatelessWidget {
   Widget _buildTableTitle(String title) {
     return Padding(
       padding: EdgeInsets.all(5),
-      child: Text(title),
+      child: SelectableText(title),
     );
   }
 
