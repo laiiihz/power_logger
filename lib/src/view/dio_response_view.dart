@@ -60,7 +60,7 @@ class _DioResponseViewState extends State<DioResponseView> {
     return BoxView(
       title: Text('Params'),
       child: HighlightView(
-        prettyJson(jsonEncode(widget.data.data)),
+        widget.data.data.toString(),
         language: 'json',
         theme: githubTheme,
       ),
