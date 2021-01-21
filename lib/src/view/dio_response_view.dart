@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/github.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
@@ -57,8 +60,9 @@ class _DioResponseViewState extends State<DioResponseView> {
     return BoxView(
       title: Text('Params'),
       child: HighlightView(
-        prettyJson(widget.data.data.toString()),
+        prettyJson(jsonEncode(widget.data.data)),
         language: 'json',
+        theme: githubTheme,
       ),
     );
   }
