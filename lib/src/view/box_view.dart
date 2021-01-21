@@ -17,6 +17,7 @@ class BoxView extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Material(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(5),
         elevation: 4,
         child: Padding(

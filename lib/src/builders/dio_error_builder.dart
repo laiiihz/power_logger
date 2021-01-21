@@ -18,8 +18,19 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
       color: Colors.red.withOpacity(0.1),
       child: ListTile(
         onTap: () {},
-        title: Text(_request.path),
-        subtitle: Text(widget.data.message),
+        title: Text(
+          _request.path,
+          style: TextStyle(
+            color: Colors.black87,
+          ),
+        ),
+        subtitle: Text(
+          widget.data.message,
+          style: TextStyle(
+            color: Colors.black45,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

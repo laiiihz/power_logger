@@ -23,7 +23,12 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
           color: Colors.green.withOpacity(0.1),
           child: ListTile(
             onTap: action,
-            title: Text(_request.path),
+            title: Text(
+              _request.path,
+              style: TextStyle(
+                color: Colors.black87,
+              ),
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
