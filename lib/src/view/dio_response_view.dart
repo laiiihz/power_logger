@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
-import 'package:flutter_highlight/themes/github.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
-import 'package:pretty_json/pretty_json.dart';
 
 class DioResponseView extends StatefulWidget {
   final Response data;
@@ -61,6 +56,15 @@ class _DioResponseViewState extends State<DioResponseView> {
       title: Text('Params'),
       child: SelectableText(widget.data.data.toString()),
     );
+  }
+
+  _buildSingleText(String title, String data) {
+    return data == null || data.length == 0
+        ? SizedBox()
+        : BoxView(
+            title: Text('Params'),
+            child: SelectableText(data.toString()),
+          );
   }
 
   @override
