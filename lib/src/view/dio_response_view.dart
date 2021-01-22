@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
+import 'package:pretty_json/pretty_json.dart';
 
 class DioResponseView extends StatefulWidget {
   final Response data;
@@ -52,9 +55,30 @@ class _DioResponseViewState extends State<DioResponseView> {
   }
 
   _buildData() {
+    bool jsonFlag = true;
+    String json;
+
+    try {
+      json = prettyJson(widget.data.data);
+    } catch (e) {
+      jsonFlag = false;
+    }
+    return jsonFlag
+        ? BoxView(
+            title: Text('Data'),
+            child: HighlightView(
+              json,
+              language: 'json',
+              theme: atomOneLightTheme,
+            ),
+          )
+        : SizedBox();
+  }
+
+  _buildRawData() {
     return BoxView(
-      title: Text('Params'),
-      child: SelectableText(widget.data.data.toString()),
+      title: Text('Raw Data'),
+      child: SelectableText(prettyJson(widget.data.data)),
     );
   }
 
@@ -92,6 +116,7 @@ class _DioResponseViewState extends State<DioResponseView> {
           _buildMap(widget.data.headers.map),
           _buildStatus(),
           _buildData(),
+          _buildRawData(),
         ],
       ),
     );

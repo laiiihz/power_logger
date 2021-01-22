@@ -6,11 +6,17 @@ class UnfocusParser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {},
-      title: Text(data.toString()),
-      trailing: Chip(
-        label: Text(data.runtimeType.toString()),
+    return Material(
+      elevation: 4,
+      color: Colors.white,
+      clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(5),
+      child: ListTile(
+        onTap: () {},
+        title: Text(data.toString()),
+        trailing: Chip(
+          label: Text(data.runtimeType.toString()),
+        ),
       ),
     );
   }

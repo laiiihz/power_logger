@@ -15,7 +15,9 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
       appBar: AppBar(
         title: Text('Logger View'),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
+        padding: EdgeInsets.all(5),
+        separatorBuilder: (_, __) => SizedBox(height: 5),
         itemBuilder: (context, index) {
           return LoggerDataParser.builder(LoggerData.data[index]);
         },

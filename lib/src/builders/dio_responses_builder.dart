@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:power_logger/src/view/dio_response_view.dart';
@@ -16,32 +15,34 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return OpenContainer(
-      tappable: false,
-      closedBuilder: (context, action) {
-        return Material(
-          color: Colors.green.withOpacity(0.1),
-          child: ListTile(
-            onTap: action,
-            title: Text(
-              _request.path,
-              style: TextStyle(
-                color: Colors.black87,
-              ),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Chip(
-                  backgroundColor: Colors.green.withOpacity(0.8),
-                  label: Text(_request.method),
-                ),
-              ],
-            ),
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      elevation: 4,
+      borderRadius: BorderRadius.circular(5),
+      color: Colors.green[100],
+      child: ListTile(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DioResponseView(data: widget.data),
           ),
-        );
-      },
-      openBuilder: (context, action) => DioResponseView(data: widget.data),
+        ),
+        title: Text(
+          _request.path,
+          style: TextStyle(
+            color: Colors.black87,
+          ),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Chip(
+              backgroundColor: Colors.green.withOpacity(0.8),
+              label: Text(_request.method),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
