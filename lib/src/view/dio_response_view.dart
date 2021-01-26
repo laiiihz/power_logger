@@ -4,10 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
+import 'package:power_logger/src/parser/dio_parser/dio_parser.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
 import 'package:pretty_json/pretty_json.dart';
+
+// enum
 
 class DioResponseView extends StatefulWidget {
   final Response data;
@@ -19,7 +22,8 @@ class DioResponseView extends StatefulWidget {
 
 class _DioResponseViewState extends State<DioResponseView> {
   bool _showRawData = false;
-  RequestOptions get _request => widget.data.request;
+  RequestOptions get _request => _dioParser.request;
+  DioParser _dioParser;
   _buildBaseURL() {
     return _request.baseUrl == null || _request.baseUrl.length == 0
         ? const SizedBox()
@@ -66,6 +70,44 @@ class _DioResponseViewState extends State<DioResponseView> {
   }
 
   _buildData() {
+    switch (_dioParser.type) {
+      case ContentType.TEXT_PLAIN:
+      case ContentType.TEXT_HTML:
+        return BoxView(
+          title: Text('Data'),
+          child: HighlightView(
+            widget.data.data,
+            language: _dioParser.highlight,
+            theme: atomOneLightTheme,
+          ),
+        );
+      case ContentType.JSON:
+        //解析字符串类型的JSON.
+        //parse json of String type.
+        if (widget.data.data is String) {
+          String json = '';
+          json = prettyJson(jsonDecode(widget.data.data));
+          return BoxView(
+            title: Text('Data'),
+            child: HighlightView(
+              json,
+              language: 'json',
+              theme: atomOneLightTheme,
+            ),
+          );
+        }
+        return BoxView(
+          title: Text('Data'),
+          child: HighlightView(
+            prettyJson(widget.data.data),
+            language: 'json',
+            theme: atomOneLightTheme,
+          ),
+        );
+        break;
+      default:
+        break;
+    }
     return BoxView(
       title: Text('Data'),
       child: HighlightView(
@@ -90,6 +132,12 @@ class _DioResponseViewState extends State<DioResponseView> {
             title: Text('Params'),
             child: SelectableText(data.toString()),
           );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _dioParser = DioParser(widget.data);
   }
 
   @override
