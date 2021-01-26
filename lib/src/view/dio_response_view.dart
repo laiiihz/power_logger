@@ -66,24 +66,14 @@ class _DioResponseViewState extends State<DioResponseView> {
   }
 
   _buildData() {
-    if (widget.data.data is Map)
-      return BoxView(
-        title: Text('Data'),
-        child: HighlightView(
-          prettyJson(widget.data.data),
-          language: 'json',
-          theme: atomOneLightTheme,
-        ),
-      );
-    else
-      return BoxView(
-        title: Text('Raw'),
-        child: HighlightView(
-          widget.data.data,
-          language: 'html',
-          theme: atomOneLightTheme,
-        ),
-      );
+    return BoxView(
+      title: Text('Data'),
+      child: HighlightView(
+        prettyJson(widget.data.data),
+        language: 'json',
+        theme: atomOneLightTheme,
+      ),
+    );
   }
 
   _buildRawData() {
