@@ -38,6 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Dio().get("https://www.baidu.com/ahefbawfbe.html").catchError((e) {
       LoggerData.addData(e);
     });
+    Dio()
+        .post("https://www.baidu.com/ahefbawfbe.html",
+            data: FormData.fromMap({'test': 'test'}))
+        .catchError((e) {
+      LoggerData.addData(e);
+    });
     Future.delayed(
       Duration(milliseconds: 300),
       () => PowerLogger.init(context),

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:power_logger/src/view/dio_error_view.dart';
 
 class DioErrorBuilder extends StatefulWidget {
   final DioError data;
@@ -48,7 +49,14 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DioErrorView(data: widget.data),
+                ),
+              );
+            },
             title: Text(
               _request.path,
               style: TextStyle(

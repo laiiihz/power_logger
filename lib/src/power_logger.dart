@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 
 class PowerLogger {
-  static init(BuildContext context) {
-    Overlay.of(context).insert(OverlayEntry(
-      builder: (context) {
-        return LoggerFAB();
-      },
-    ));
+  static bool debug = true;
+
+  ///初始化
+  ///
+  ///默认开启debug
+  static init(BuildContext context, {bool debug = true}) {
+    PowerLogger.debug = debug;
+    if (debug)
+      Overlay.of(context).insert(OverlayEntry(
+        builder: (context) {
+          return LoggerFAB();
+        },
+      ));
   }
 }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
@@ -16,6 +18,7 @@ class DioResponseView extends StatefulWidget {
 }
 
 class _DioResponseViewState extends State<DioResponseView> {
+  bool _showRawData = false;
   RequestOptions get _request => widget.data.request;
   _buildBaseURL() {
     return _request.baseUrl == null || _request.baseUrl.length == 0
@@ -45,7 +48,15 @@ class _DioResponseViewState extends State<DioResponseView> {
     );
   }
 
-  _buildMap(Map<String, dynamic> params) {
+  _buildMap(dynamic params) {
+    if (params is FormData) {
+      Map<String, dynamic> formData = {};
+      formData.addEntries(params.fields);
+      return BoxView(
+        title: Text('FormData'),
+        child: TableView(map: formData),
+      );
+    }
     return params?.isEmpty ?? true
         ? const SizedBox()
         : BoxView(
@@ -55,30 +66,30 @@ class _DioResponseViewState extends State<DioResponseView> {
   }
 
   _buildData() {
-    bool jsonFlag = true;
-    String json;
-
-    try {
-      json = prettyJson(widget.data.data);
-    } catch (e) {
-      jsonFlag = false;
-    }
-    return jsonFlag
-        ? BoxView(
-            title: Text('Data'),
-            child: HighlightView(
-              json,
-              language: 'json',
-              theme: atomOneLightTheme,
-            ),
-          )
-        : SizedBox();
+    if (widget.data.data is Map)
+      return BoxView(
+        title: Text('Data'),
+        child: HighlightView(
+          prettyJson(widget.data.data),
+          language: 'json',
+          theme: atomOneLightTheme,
+        ),
+      );
+    else
+      return BoxView(
+        title: Text('Raw'),
+        child: HighlightView(
+          widget.data.data,
+          language: 'html',
+          theme: atomOneLightTheme,
+        ),
+      );
   }
 
   _buildRawData() {
     return BoxView(
       title: Text('Raw Data'),
-      child: SelectableText(prettyJson(widget.data.data)),
+      child: SelectableText(widget.data.data),
     );
   }
 
@@ -95,12 +106,14 @@ class _DioResponseViewState extends State<DioResponseView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green[600],
         title: Text(widget.data.request.path),
         actions: [
           Chip(
             label: Text(widget.data.request.method),
             backgroundColor: Colors.lightGreen,
           ),
+          SizedBox(width: 8),
         ],
       ),
       body: ListView(
@@ -115,8 +128,22 @@ class _DioResponseViewState extends State<DioResponseView> {
           TitleView(title: Text('Response')),
           _buildMap(widget.data.headers.map),
           _buildStatus(),
-          _buildData(),
-          _buildRawData(),
+          SwitchListTile(
+            value: _showRawData,
+            title: Text('RawData'),
+            onChanged: (state) => setState(() => _showRawData = state),
+          ),
+          AnimatedCrossFade(
+            firstChild: _buildRawData(),
+            secondChild: _buildData(),
+            crossFadeState: _showRawData
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            duration: Duration(milliseconds: 500),
+            firstCurve: Curves.easeInOutCubic,
+            secondCurve: Curves.easeInOutCubic,
+            sizeCurve: Curves.easeInOutCubic,
+          ),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'package:power_logger/power_logger.dart';
+
 class LoggerData {
   static int _maxLength = 100;
 
@@ -9,11 +11,13 @@ class LoggerData {
   }
 
   static addData(dynamic data) {
-    if (_data.length < _maxLength)
-      _data.insert(0, data);
-    else {
-      _data.removeLast();
-      _data.insert(0, data);
+    if (PowerLogger.debug) {
+      if (_data.length < _maxLength)
+        _data.insert(0, data);
+      else {
+        _data.removeLast();
+        _data.insert(0, data);
+      }
     }
   }
 

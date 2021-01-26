@@ -14,6 +14,15 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Logger View'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.clear_all_rounded),
+            onPressed: () {
+              LoggerData.clear();
+              setState(() {});
+            },
+          ),
+        ],
       ),
       body: ListView.separated(
         padding: EdgeInsets.all(5),
