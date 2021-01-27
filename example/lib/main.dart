@@ -44,6 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
         .catchError((e) {
       LoggerData.addData(e);
     });
+
+    Dio()
+        .get(
+            "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png")
+        .then((e) {
+      LoggerData.addData(e);
+    });
     Future.delayed(
       Duration(milliseconds: 300),
       () => PowerLogger.init(context),

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -105,6 +107,12 @@ class _DioResponseViewState extends State<DioResponseView> {
           ),
         );
         break;
+      case ContentType.IMAGE:
+        return Text("IMAGE");
+      case ContentType.AUDIO:
+        return Text("AUDIO");
+      case ContentType.VIDEO:
+        return Text("VIDEO");
       default:
         break;
     }
