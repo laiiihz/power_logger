@@ -129,7 +129,7 @@ class _DioResponseViewState extends State<DioResponseView> {
   _buildRawData() {
     return BoxView(
       title: Text('Raw Data'),
-      child: SelectableText(widget.data.data),
+      child: SelectableText(widget.data.data.toString()),
     );
   }
 
