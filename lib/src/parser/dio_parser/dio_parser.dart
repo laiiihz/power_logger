@@ -35,8 +35,9 @@ class DioParser {
     }
     if (_ctype.contains('image/')) return ContentType.IMAGE;
     if (_ctype.contains('audio/')) return ContentType.AUDIO;
-    if (_ctype.contains('video/'))
-      return ContentType.VIDEO;
+    if (_ctype.contains('video/')) return ContentType.VIDEO;
+    if (_ctype.contains('application/json'))
+      return ContentType.JSON;
     else
       return ContentType.UNCATCH;
   }
