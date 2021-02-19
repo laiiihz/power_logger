@@ -25,7 +25,7 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
         return '接收超时';
         break;
       case DioErrorType.RESPONSE:
-        return '404 or Serve Side Error';
+        return 'Serve Side Error';
         break;
       case DioErrorType.CANCEL:
         return '取消连接';

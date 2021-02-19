@@ -1,6 +1,6 @@
 name: power_logger
-description: A new Flutter package.
-version: 0.0.1
+description: A well log tool on flutter, support Dio and custom type data.
+version: 0.1.0
 homepage: https://github.com/laiiihz/power_logger
 
 environment:
