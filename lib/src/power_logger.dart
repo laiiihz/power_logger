@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 
 class PowerLogger {
+  /// debug tag
   static bool debug = true;
 
   ///初始化
   ///
   ///默认开启debug
+  ///
+  ///```dart
+  ///PowerLogger.init(context,debug:true);
+  ///```
   static init(BuildContext context, {bool debug = true}) {
     PowerLogger.debug = debug;
     if (debug)
@@ -20,6 +25,7 @@ class PowerLogger {
   }
 }
 
+///Logger FAB
 class LoggerFAB extends StatefulWidget {
   LoggerFAB({Key key}) : super(key: key);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// UnfocusParser
 class UnfocusParser extends StatelessWidget {
   final dynamic data;
   const UnfocusParser({Key key, @required this.data}) : super(key: key);

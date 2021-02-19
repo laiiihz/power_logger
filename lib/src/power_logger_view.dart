@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 
+
+///Logger view
 class PowerLoggerView extends StatefulWidget {
   PowerLoggerView({Key key}) : super(key: key);
 

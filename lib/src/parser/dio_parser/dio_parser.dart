@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+/// original http content type.
 enum ContentType {
   TEXT_PLAIN,
   TEXT_HTML,
@@ -12,13 +13,20 @@ enum ContentType {
   UNCATCH,
 }
 
+/// Dio parse
 class DioParser {
   Response _response;
   DioParser(Response response) {
     _response = response;
   }
+
+  /// get dio request
   RequestOptions get request => _response.request;
+
+  /// get dio response
   Response get response => _response;
+
+  /// get dio contentType
   ContentType get type {
     String _ctype = response.headers.map['content-type'].first;
     switch (_ctype) {
@@ -42,6 +50,7 @@ class DioParser {
       return ContentType.UNCATCH;
   }
 
+  /// get highlight type.
   String get highlight {
     switch (type) {
       case ContentType.TEXT_HTML:

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:power_logger/src/view/dio_response_view.dart';
 
+/// Dio Response Builder
 class DioResponseBuilder extends StatefulWidget {
   final Response data;
   DioResponseBuilder({Key key, this.data}) : super(key: key);

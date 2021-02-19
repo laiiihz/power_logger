@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:power_logger/src/view/dio_error_view.dart';
 
+///Dio Error builder
 class DioErrorBuilder extends StatefulWidget {
   final DioError data;
   DioErrorBuilder({Key key, @required this.data}) : super(key: key);
