@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-  ///BoxView
+///BoxView
 class BoxView extends StatelessWidget {
   final Widget title;
   final Widget child;
