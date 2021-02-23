@@ -10,6 +10,15 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return ListView(
+      children: [
+        SwitchListTile(
+          title: Text('终端日志'),
+          subtitle: Text(''),
+          value: false,
+          onChanged: (state) {},
+        ),
+      ],
+    );
   }
 }

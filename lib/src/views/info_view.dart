@@ -74,7 +74,7 @@ class _InfoViewState extends State<InfoView>
             children: [
               Text(title),
               Text(
-                subTitle,
+                subTitle ?? '',
                 style: TextStyle(fontSize: 22),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -89,7 +89,7 @@ class _InfoViewState extends State<InfoView>
   _buildTile(String title, String subTitle) {
     return ListTile(
       title: Text(title),
-      subtitle: Text(subTitle),
+      subtitle: Text(subTitle ?? ''),
       onLongPress: () {
         Clipboard.setData(ClipboardData(text: subTitle));
         Scaffold.of(context).showSnackBar(SnackBar(content: Text('已复制')));
