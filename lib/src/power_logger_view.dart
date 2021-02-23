@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
+import 'package:power_logger/src/views/info_view.dart';
+import 'package:power_logger/src/views/logger_view.dart';
+import 'package:power_logger/src/views/settings_view.dart';
 
 ///Logger view
 class PowerLoggerView extends StatefulWidget {
@@ -10,6 +13,9 @@ class PowerLoggerView extends StatefulWidget {
 }
 
 class _PowerLoggerViewState extends State<PowerLoggerView> {
+  PageController _pageController = PageController();
+  int _currentIndex = 0;
+  void Function(void Function()) _setState;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,13 +31,41 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
           ),
         ],
       ),
-      body: ListView.separated(
-        padding: EdgeInsets.all(5),
-        separatorBuilder: (_, __) => SizedBox(height: 5),
-        itemBuilder: (context, index) {
-          return LoggerDataParser.builder(LoggerData.data[index]);
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          _currentIndex = index;
+          if (_setState != null) _setState(() {});
         },
-        itemCount: LoggerData.data.length,
+        children: [
+          LoggerView(),
+          InfoView(),
+          SettingsView(),
+        ],
+      ),
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, kSetState) {
+          _setState = kSetState;
+          return BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              _currentIndex = index;
+              kSetState(() {});
+              _pageController.animateToPage(
+                index,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOutCubic,
+              );
+            },
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assessment), label: '日志'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.perm_device_information), label: '信息'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: '设置'),
+            ],
+          );
+        },
       ),
     );
   }
