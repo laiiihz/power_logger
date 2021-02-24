@@ -48,6 +48,7 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
           _setState = kSetState;
           return BottomNavigationBar(
             currentIndex: _currentIndex,
+            backgroundColor: Colors.white,
             onTap: (index) {
               _currentIndex = index;
               kSetState(() {});

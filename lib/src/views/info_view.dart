@@ -87,13 +87,16 @@ class _InfoViewState extends State<InfoView>
   }
 
   _buildTile(String title, String subTitle) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subTitle ?? ''),
-      onLongPress: () {
-        Clipboard.setData(ClipboardData(text: subTitle));
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('已复制')));
-      },
+    return DefaultTextStyle(
+      style: TextStyle(color: Colors.black),
+      child: ListTile(
+        title: Text(title),
+        subtitle: Text(subTitle ?? ''),
+        onLongPress: () {
+          Clipboard.setData(ClipboardData(text: subTitle));
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text('已复制')));
+        },
+      ),
     );
   }
 
@@ -128,7 +131,7 @@ class _InfoViewState extends State<InfoView>
       _buildTile('securityPatch', androidInfo.version.securityPatch),
       _buildTile('previewSdkInt', androidInfo.version.previewSdkInt.toString()),
       _buildTile('sdkInt', androidInfo.version.sdkInt.toString()),
-      _buildTile('systemFeatures', androidInfo.systemFeatures.join(',')),
+      _buildTile('systemFeatures', androidInfo.systemFeatures.join('\n')),
     ]));
   }
 
