@@ -10,7 +10,7 @@ class TableView extends StatelessWidget {
     );
   }
 
-  Map<String, dynamic> get _map => map ?? {};
+  Map get _map => map ?? {};
 
   @override
   Widget build(BuildContext context) {
