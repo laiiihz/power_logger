@@ -15,6 +15,7 @@ dependencies:
   flutter_highlight: ^0.6.0
   device_info: ^1.0.0
   package_info: ^0.4.3+4
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:

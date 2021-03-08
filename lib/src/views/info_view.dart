@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,57 +31,39 @@ class _InfoViewState extends State<InfoView>
       packageInfo != null && (androidInfo != null || iosInfo != null);
 
   _buildGridItem(String title, String subTitle) {
-    return CupertinoContextMenu(
-      actions: [
-        CupertinoContextMenuAction(
-          child: Text('复制'),
-          onPressed: () {
-            Clipboard.setData(ClipboardData(text: subTitle));
-            Navigator.pop(context);
-          },
-        ),
-      ],
-      previewBuilder: (context, animation, child) {
-        return Material(
-          borderRadius: BorderRadius.circular(8),
-          child: Container(
-            width: MediaQuery.of(context).size.width - 100,
-            constraints: BoxConstraints(minHeight: 300),
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(title),
-                Text(
-                  subTitle,
-                  style: TextStyle(fontSize: 22),
-                ),
-              ],
-            ),
+    return MaterialButton(
+      elevation: 2,
+      onPressed: () {},
+      onLongPress: () {
+        Scaffold.of(context).hideCurrentSnackBar();
+        Clipboard.setData(ClipboardData(text: subTitle));
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('已复制'),
+          action: SnackBarAction(
+            label: '确定',
+            onPressed: () {
+              Scaffold.of(context).hideCurrentSnackBar();
+            },
           ),
-        );
+        ));
       },
-      child: Material(
-        color: Colors.white,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
-        elevation: 3,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title),
-              Text(
-                subTitle ?? '',
-                style: TextStyle(fontSize: 22),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+      ),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title),
+            AutoSizeText(
+              subTitle ?? '',
+              style: TextStyle(fontSize: 26),
+              maxLines: 2,
+            ),
+          ],
         ),
       ),
     );
@@ -93,8 +76,17 @@ class _InfoViewState extends State<InfoView>
         title: Text(title),
         subtitle: Text(subTitle ?? ''),
         onLongPress: () {
+          Scaffold.of(context).hideCurrentSnackBar();
           Clipboard.setData(ClipboardData(text: subTitle));
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text('已复制')));
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('已复制'),
+            action: SnackBarAction(
+              label: '确定',
+              onPressed: () {
+                Scaffold.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ));
         },
       ),
     );
