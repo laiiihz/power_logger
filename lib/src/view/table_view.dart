@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TableView extends StatelessWidget {
-  final Map<String, dynamic> map;
+  final Map map;
   const TableView({Key key, @required this.map}) : super(key: key);
   Widget _buildTableTitle(String title) {
     return Padding(
@@ -26,7 +26,7 @@ class TableView extends StatelessWidget {
         ..._map.entries
             .map((e) => TableRow(
                   children: [
-                    _buildTableTitle(e.key),
+                    _buildTableTitle(e.key.toString()),
                     _buildTableTitle(e.value.toString()),
                   ],
                 ))
