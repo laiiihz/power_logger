@@ -98,18 +98,23 @@ class _FabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        height: 50,
-        width: 50,
-        child: Icon(
-          Icons.code,
-          color: Colors.white70,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).accentColor,
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 3),
+            color: Colors.black12,
+            blurRadius: 4,
+          )
+        ],
+      ),
+      height: 48,
+      width: 48,
+      child: Icon(
+        Icons.code,
+        color: Colors.white70,
       ),
     );
   }
