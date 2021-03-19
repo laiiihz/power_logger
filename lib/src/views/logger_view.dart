@@ -12,9 +12,7 @@ class LoggerView extends StatefulWidget {
 class _LoggerViewState extends State<LoggerView> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: EdgeInsets.all(5),
-      separatorBuilder: (_, __) => SizedBox(height: 5),
+    return ListView.builder(
       itemBuilder: (context, index) {
         return LoggerDataParser.builder(LoggerData.data[index]);
       },

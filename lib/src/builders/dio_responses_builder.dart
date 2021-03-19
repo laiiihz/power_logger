@@ -17,9 +17,7 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      clipBehavior: Clip.antiAlias,
-      elevation: 4,
-      borderRadius: BorderRadius.circular(5),
+      elevation: 0,
       color: Colors.green[100],
       child: ListTile(
         onTap: () => Navigator.push(

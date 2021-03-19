@@ -42,10 +42,7 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
   Widget build(BuildContext context) {
     if (widget.data == null) return ListTile(title: Text('NULL Dio Error'));
     return Material(
-      clipBehavior: Clip.antiAlias,
-      borderRadius: BorderRadius.circular(5),
       color: Colors.red[100],
-      elevation: 4,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
