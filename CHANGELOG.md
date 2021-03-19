@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.1.2]
+
+* performance enhanced.
+* update fab style.
+
 ## [0.1.1]
 
 * new user interface.
