@@ -51,10 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         .then((e) {
       LoggerData.addData(e);
     });
-    Future.delayed(
-      Duration(milliseconds: 300),
-      () => PowerLogger.init(context),
-    );
+    PowerLogger.start(context);
     LoggerData.addData('TEST');
   }
 
