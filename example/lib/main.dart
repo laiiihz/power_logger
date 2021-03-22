@@ -28,29 +28,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Dio().get("https://192.168.31.255:8888").catchError((e) {
-      LoggerData.addData(e);
-    });
-    Dio().get("https://www.baidu.com", queryParameters: {'test': 'test'}).then(
-        (e) {
-      LoggerData.addData(e);
-    });
-    Dio().get("https://www.baidu.com/ahefbawfbe.html").catchError((e) {
-      LoggerData.addData(e);
-    });
-    Dio()
-        .post("https://www.baidu.com/ahefbawfbe.html",
-            data: FormData.fromMap({'test': 'test'}))
-        .catchError((e) {
-      LoggerData.addData(e);
-    });
+    NetTool.init();
+    NetTool.dio.get("https://192.168.31.255:8888");
+    NetTool.dio.get("https://www.baidu.com", queryParameters: {'test': 'test'});
+    NetTool.dio.get("https://www.baidu.com/ahefbawfbe.html");
+    NetTool.dio.post(
+      "https://www.baidu.com/ahefbawfbe.html",
+      data: FormData.fromMap({'test': 'test'}),
+    );
 
-    Dio()
-        .get(
-            "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png")
-        .then((e) {
-      LoggerData.addData(e);
-    });
+    NetTool.dio.get(
+        "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
     PowerLogger.start(context);
     LoggerData.addData('TEST');
   }
@@ -62,5 +50,24 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
     );
+  }
+}
+
+class NetTool {
+  static Dio dio = Dio();
+  static init() {
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options) async {
+        return options;
+      },
+      onResponse: (response) async {
+        LoggerData.addData(response);
+        return response;
+      },
+      onError: (DioError e) async {
+        LoggerData.addData(e);
+        return e;
+      },
+    ));
   }
 }

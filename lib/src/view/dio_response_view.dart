@@ -132,14 +132,14 @@ class _DioResponseViewState extends State<DioResponseView> {
     );
   }
 
-  _buildSingleText(String title, String data) {
-    return data == null || data.length == 0
-        ? SizedBox()
-        : BoxView(
-            title: Text('Params'),
-            child: SelectableText(data.toString()),
-          );
-  }
+  // _buildSingleText(String title, String data) {
+  //   return data == null || data.length == 0
+  //       ? SizedBox()
+  //       : BoxView(
+  //           title: Text('Params'),
+  //           child: SelectableText(data.toString()),
+  //         );
+  // }
 
   @override
   void initState() {

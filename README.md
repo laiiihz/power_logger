@@ -9,10 +9,7 @@ A well log tool on flutter, support Dio and custom type data.
 * init logger
 
 ```dart
-Future.delayed(
-    Duration(milliseconds: 300),
-    () => PowerLogger.init(context),
-);
+PowerLogger.start(context);
 ```
 
 * add data to logger

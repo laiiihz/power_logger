@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.1.3]
+
+* listenable value.
+* update example app.
+
 ## [0.1.2]
 
 * performance enhanced.

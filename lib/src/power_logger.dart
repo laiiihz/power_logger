@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:power_logger/src/widgets/logger_fab.dart';
 

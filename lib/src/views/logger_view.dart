@@ -10,6 +10,20 @@ class LoggerView extends StatefulWidget {
 }
 
 class _LoggerViewState extends State<LoggerView> {
+  updateList() => setState(() {});
+
+  @override
+  void initState() {
+    super.initState();
+    LoggerData.addListener(updateList);
+  }
+
+  @override
+  void dispose() {
+    LoggerData.removeListener(updateList);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
