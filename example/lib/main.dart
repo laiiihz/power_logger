@@ -57,14 +57,14 @@ class NetTool {
   static Dio dio = Dio();
   static init() {
     dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options) async {
+      onRequest: (options, handler) async {
         return options;
       },
-      onResponse: (response) async {
+      onResponse: (response, handler) async {
         LoggerData.addData(response);
         return response;
       },
-      onError: (DioError e) async {
+      onError: (DioError e, handler) async {
         LoggerData.addData(e);
         return e;
       },

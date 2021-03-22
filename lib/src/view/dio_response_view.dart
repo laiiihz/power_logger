@@ -152,10 +152,10 @@ class _DioResponseViewState extends State<DioResponseView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[600],
-        title: Text(widget.data.request.path),
+        title: Text(widget.data.requestOptions.path),
         actions: [
           Chip(
-            label: Text(widget.data.request.method),
+            label: Text(widget.data.requestOptions.method),
             backgroundColor: Colors.lightGreen,
           ),
           SizedBox(width: 8),

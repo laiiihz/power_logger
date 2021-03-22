@@ -12,7 +12,7 @@ class DioResponseBuilder extends StatefulWidget {
 }
 
 class _DioResponseBuilderState extends State<DioResponseBuilder> {
-  RequestOptions get _request => widget?.data?.request;
+  RequestOptions get _request => widget?.data?.requestOptions;
 
   @override
   Widget build(BuildContext context) {

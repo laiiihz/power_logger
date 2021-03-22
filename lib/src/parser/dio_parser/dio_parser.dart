@@ -21,7 +21,7 @@ class DioParser {
   }
 
   /// get dio request
-  RequestOptions get request => _response.request;
+  RequestOptions get request => _response.requestOptions;
 
   /// get dio response
   Response get response => _response;

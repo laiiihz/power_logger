@@ -12,26 +12,26 @@ class DioErrorBuilder extends StatefulWidget {
 }
 
 class _DioErrorBuilderState extends State<DioErrorBuilder> {
-  RequestOptions get _request => widget?.data?.request;
+  RequestOptions get _request => widget?.data?.requestOptions;
 
   String renderErrText(DioErrorType type) {
     switch (type) {
-      case DioErrorType.CONNECT_TIMEOUT:
+      case DioErrorType.connectTimeout:
         return '连接超时';
         break;
-      case DioErrorType.SEND_TIMEOUT:
+      case DioErrorType.sendTimeout:
         return '发送超时';
         break;
-      case DioErrorType.RECEIVE_TIMEOUT:
+      case DioErrorType.receiveTimeout:
         return '接收超时';
         break;
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         return 'Serve Side Error';
         break;
-      case DioErrorType.CANCEL:
+      case DioErrorType.cancel:
         return '取消连接';
         break;
-      case DioErrorType.DEFAULT:
+      case DioErrorType.other:
         return '未知错误';
         break;
     }

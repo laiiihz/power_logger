@@ -13,7 +13,7 @@ class DioErrorView extends StatefulWidget {
 }
 
 class _DioErrorViewState extends State<DioErrorView> {
-  RequestOptions get _request => widget.data.request;
+  RequestOptions get _request => widget.data.requestOptions;
   _buildBaseURL() {
     return _request.baseUrl == null || _request.baseUrl.length == 0
         ? const SizedBox()
@@ -61,10 +61,10 @@ class _DioErrorViewState extends State<DioErrorView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[600],
-        title: Text(widget.data.request.path),
+        title: Text(widget.data.requestOptions.path),
         actions: [
           Chip(
-            label: Text(widget.data.request.method),
+            label: Text(widget.data.requestOptions.method),
             backgroundColor: Colors.lightGreen,
           ),
           SizedBox(width: 8),
