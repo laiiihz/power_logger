@@ -20,7 +20,7 @@ LoggerData.addData(data);
 
 ## WARNING
 
-*only tested on flutter `1.22.5`,`1.22.6`
+* flutter SDK >= 2.0.0
 
 ## author
 

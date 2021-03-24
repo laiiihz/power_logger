@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -58,15 +58,15 @@ class NetTool {
   static init() {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
-        return options;
+        return handler.next(options);
       },
       onResponse: (response, handler) async {
         LoggerData.addData(response);
-        return response;
+        return handler.next(response);
       },
       onError: (DioError e, handler) async {
         LoggerData.addData(e);
-        return e;
+        return handler.next(e);
       },
     ));
   }
