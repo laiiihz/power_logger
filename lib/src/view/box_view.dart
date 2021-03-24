@@ -17,37 +17,29 @@ class BoxView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(5),
-      child: Material(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        elevation: 4,
-        child: Padding(
-          padding: EdgeInsets.all(5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DefaultTextStyle(
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w600,
-                ),
-                child: title,
-              ),
-              child == null ? SizedBox() : SizedBox(height: 10),
-              DefaultTextStyle(
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w400,
-                ),
-                child: child ?? SizedBox(),
-              ),
-              children == null ? SizedBox() : SizedBox(height: 10),
-              ...children ?? [],
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+            ),
+            child: title,
           ),
-        ),
+          child == null ? SizedBox() : SizedBox(height: 10),
+          DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+              fontWeight: FontWeight.w400,
+            ),
+            child: child ?? SizedBox(),
+          ),
+          children == null ? SizedBox() : SizedBox(height: 10),
+          ...children ?? [],
+        ],
       ),
     );
   }

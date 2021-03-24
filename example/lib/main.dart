@@ -49,6 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          NetTool.dio.get("https://www.baidu.com");
+        },
+      ),
     );
   }
 }
