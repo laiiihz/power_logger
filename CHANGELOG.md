@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.1.4]
+
+* add logger.
+* update example app.
+
 ## [0.1.3]
 
 * listenable value.

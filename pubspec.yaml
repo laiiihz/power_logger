@@ -1,6 +1,6 @@
 name: power_logger
 description: A well log tool on flutter, support Dio and custom type data.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/laiiihz/power_logger
 
 environment:
@@ -16,6 +16,7 @@ dependencies:
   device_info: ^1.0.0
   package_info: ^0.4.3+4
   auto_size_text: ^2.1.0
+  logger: ^0.9.4
 
 dev_dependencies:
   flutter_test:

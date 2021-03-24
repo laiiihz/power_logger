@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_logger/power_logger.dart';
 
 class SettingsView extends StatefulWidget {
   SettingsView({Key key}) : super(key: key);
@@ -15,8 +16,11 @@ class _SettingsViewState extends State<SettingsView> {
         SwitchListTile(
           title: Text('终端日志'),
           subtitle: Text(''),
-          value: false,
-          onChanged: (state) {},
+          value: LoggerData.markLogger,
+          onChanged: (state) {
+            LoggerData.setLogger(state);
+            setState(() {});
+          },
         ),
       ],
     );
