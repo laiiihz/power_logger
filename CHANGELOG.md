@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.0.0-nullsafety.0]
+
+* migrate to sound null safety.
+
 ## [0.1.3]
 
 * listenable value.
