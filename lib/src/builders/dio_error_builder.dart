@@ -5,42 +5,34 @@ import 'package:power_logger/src/view/dio_error_view.dart';
 ///Dio Error builder
 class DioErrorBuilder extends StatefulWidget {
   final DioError data;
-  DioErrorBuilder({Key key, @required this.data}) : super(key: key);
+  DioErrorBuilder({Key? key, required this.data}) : super(key: key);
 
   @override
   _DioErrorBuilderState createState() => _DioErrorBuilderState();
 }
 
 class _DioErrorBuilderState extends State<DioErrorBuilder> {
-  RequestOptions get _request => widget?.data?.requestOptions;
+  RequestOptions get _request => widget.data.requestOptions;
 
   String renderErrText(DioErrorType type) {
     switch (type) {
       case DioErrorType.connectTimeout:
         return '连接超时';
-        break;
       case DioErrorType.sendTimeout:
         return '发送超时';
-        break;
       case DioErrorType.receiveTimeout:
         return '接收超时';
-        break;
       case DioErrorType.response:
         return 'Serve Side Error';
-        break;
       case DioErrorType.cancel:
         return '取消连接';
-        break;
       case DioErrorType.other:
         return '未知错误';
-        break;
     }
-    return '';
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.data == null) return ListTile(title: Text('NULL Dio Error'));
     return Material(
       color: Colors.red[100],
       child: Column(

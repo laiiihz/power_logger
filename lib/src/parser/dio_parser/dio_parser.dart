@@ -15,20 +15,20 @@ enum ContentType {
 
 /// Dio parse
 class DioParser {
-  Response _response;
-  DioParser(Response response) {
+  Response? _response;
+  DioParser(Response? response) {
     _response = response;
   }
 
   /// get dio request
-  RequestOptions get request => _response.requestOptions;
+  RequestOptions get request => _response!.requestOptions;
 
   /// get dio response
-  Response get response => _response;
+  Response? get response => _response;
 
   /// get dio contentType
   ContentType get type {
-    String _ctype = response.headers.map['content-type'].first;
+    String _ctype = response!.headers.map['content-type']!.first;
     switch (_ctype) {
       case 'text/plain':
         return ContentType.TEXT_PLAIN;

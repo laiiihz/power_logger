@@ -3,7 +3,7 @@ import 'package:flutter/physics.dart';
 import 'package:power_logger/src/power_logger_view.dart';
 
 class LoggerFab extends StatefulWidget {
-  LoggerFab({Key key}) : super(key: key);
+  LoggerFab({Key? key}) : super(key: key);
 
   @override
   _LoggerFabState createState() => _LoggerFabState();
@@ -12,9 +12,9 @@ class LoggerFab extends StatefulWidget {
 class _LoggerFabState extends State<LoggerFab>
     with SingleTickerProviderStateMixin {
   bool showSubPage = false;
-  AnimationController _animationController;
+  AnimationController? _animationController;
   var _dragAlignment = Alignment.center;
-  Animation<Alignment> _animation;
+  late Animation<Alignment> _animation;
   final _spring =
       const SpringDescription(mass: 15, stiffness: 1000, damping: 0.7);
 
@@ -34,7 +34,7 @@ class _LoggerFabState extends State<LoggerFab>
       calcAlignment = Alignment(calcAlignment.x, 0.9);
     if (_dragAlignment.y <= -0.9)
       calcAlignment = Alignment(calcAlignment.x, -0.9);
-    _animation = _animationController.drive(
+    _animation = _animationController!.drive(
       AlignmentTween(
         begin: _dragAlignment,
         end: calcAlignment,
@@ -44,7 +44,7 @@ class _LoggerFabState extends State<LoggerFab>
     final simulation =
         SpringSimulation(_spring, 0, 1, _normalizeVelocity(velocity, size));
 
-    _animationController.animateWith(simulation);
+    _animationController!.animateWith(simulation);
   }
 
   @override
@@ -69,7 +69,7 @@ class _LoggerFabState extends State<LoggerFab>
         duration: Duration(milliseconds: 300),
         opacity: showSubPage ? 0 : 1,
         child: GestureDetector(
-          onPanStart: (details) => _animationController.stop(canceled: true),
+          onPanStart: (details) => _animationController!.stop(canceled: true),
           onPanUpdate: (details) => setState(() => _dragAlignment += Alignment(
                 details.delta.dx / (size.width / 2),
                 details.delta.dy / (size.height / 2),
@@ -94,7 +94,7 @@ class _LoggerFabState extends State<LoggerFab>
 }
 
 class _FabButton extends StatelessWidget {
-  const _FabButton({Key key}) : super(key: key);
+  const _FabButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

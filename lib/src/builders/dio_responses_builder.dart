@@ -5,14 +5,14 @@ import 'package:power_logger/src/view/dio_response_view.dart';
 /// Dio Response Builder
 class DioResponseBuilder extends StatefulWidget {
   final Response data;
-  DioResponseBuilder({Key key, this.data}) : super(key: key);
+  DioResponseBuilder({Key? key,required this.data}) : super(key: key);
 
   @override
   _DioResponseBuilderState createState() => _DioResponseBuilderState();
 }
 
 class _DioResponseBuilderState extends State<DioResponseBuilder> {
-  RequestOptions get _request => widget?.data?.requestOptions;
+  RequestOptions? get _request => widget.data.requestOptions;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
           ),
         ),
         title: Text(
-          _request.path,
+          _request!.path,
           style: TextStyle(
             color: Colors.black87,
           ),
@@ -37,7 +37,7 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
           children: [
             Chip(
               backgroundColor: Colors.green.withOpacity(0.8),
-              label: Text(_request.method),
+              label: Text(_request!.method),
             ),
           ],
         ),

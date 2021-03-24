@@ -6,7 +6,7 @@ import 'package:power_logger/src/view/title_view.dart';
 
 class DioErrorView extends StatefulWidget {
   final DioError data;
-  DioErrorView({Key key, @required this.data}) : super(key: key);
+  DioErrorView({Key? key, required this.data}) : super(key: key);
 
   @override
   _DioErrorViewState createState() => _DioErrorViewState();
@@ -15,7 +15,7 @@ class DioErrorView extends StatefulWidget {
 class _DioErrorViewState extends State<DioErrorView> {
   RequestOptions get _request => widget.data.requestOptions;
   _buildBaseURL() {
-    return _request.baseUrl == null || _request.baseUrl.length == 0
+    return _request.baseUrl.length == 0
         ? const SizedBox()
         : BoxView(
             title: Text('BaseURL'),

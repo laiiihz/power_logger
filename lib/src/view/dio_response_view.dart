@@ -14,8 +14,8 @@ import 'package:power_logger/src/view/title_view.dart';
 // enum
 
 class DioResponseView extends StatefulWidget {
-  final Response data;
-  DioResponseView({Key key, @required this.data}) : super(key: key);
+  final Response? data;
+  DioResponseView({Key? key, required this.data}) : super(key: key);
 
   @override
   _DioResponseViewState createState() => _DioResponseViewState();
@@ -24,9 +24,9 @@ class DioResponseView extends StatefulWidget {
 class _DioResponseViewState extends State<DioResponseView> {
   bool _showRawData = false;
   RequestOptions get _request => _dioParser.request;
-  DioParser _dioParser;
+  late DioParser _dioParser;
   _buildBaseURL() {
-    return _request.baseUrl == null || _request.baseUrl.length == 0
+    return _request.baseUrl.length == 0
         ? const SizedBox()
         : BoxView(
             title: Text('BaseURL'),
@@ -46,9 +46,9 @@ class _DioResponseViewState extends State<DioResponseView> {
       title: const Text('Status'),
       children: [
         Chip(
-          label: Text(widget.data.statusCode.toString()),
+          label: Text(widget.data!.statusCode.toString()),
         ),
-        Text(widget.data.statusMessage),
+        Text(widget.data!.statusMessage!),
       ],
     );
   }
@@ -77,7 +77,7 @@ class _DioResponseViewState extends State<DioResponseView> {
         return BoxView(
           title: Text('Data'),
           child: HighlightView(
-            widget.data.data,
+            widget.data!.data,
             language: _dioParser.highlight,
             theme: atomOneLightTheme,
           ),
@@ -85,9 +85,9 @@ class _DioResponseViewState extends State<DioResponseView> {
       case ContentType.JSON:
         //解析字符串类型的JSON.
         //parse json of String type.
-        if (widget.data.data is String) {
+        if (widget.data!.data is String) {
           String json = '';
-          json = prettyJson(jsonDecode(widget.data.data));
+          json = prettyJson(jsonDecode(widget.data!.data));
           return BoxView(
             title: Text('Data'),
             child: HighlightView(
@@ -100,12 +100,11 @@ class _DioResponseViewState extends State<DioResponseView> {
         return BoxView(
           title: Text('Data'),
           child: HighlightView(
-            prettyJson(widget.data.data),
+            prettyJson(widget.data!.data),
             language: 'json',
             theme: atomOneLightTheme,
           ),
         );
-        break;
       case ContentType.IMAGE:
         return Text("IMAGE");
       case ContentType.AUDIO:
@@ -118,7 +117,7 @@ class _DioResponseViewState extends State<DioResponseView> {
     return BoxView(
       title: Text('Data'),
       child: HighlightView(
-        prettyJson(widget.data.data),
+        prettyJson(widget.data!.data),
         language: 'json',
         theme: atomOneLightTheme,
       ),
@@ -128,7 +127,7 @@ class _DioResponseViewState extends State<DioResponseView> {
   _buildRawData() {
     return BoxView(
       title: Text('Raw Data'),
-      child: SelectableText(widget.data.data.toString()),
+      child: SelectableText(widget.data!.data.toString()),
     );
   }
 
@@ -152,10 +151,10 @@ class _DioResponseViewState extends State<DioResponseView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[600],
-        title: Text(widget.data.requestOptions.path),
+        title: Text(widget.data!.requestOptions.path),
         actions: [
           Chip(
-            label: Text(widget.data.requestOptions.method),
+            label: Text(widget.data!.requestOptions.method),
             backgroundColor: Colors.lightGreen,
           ),
           SizedBox(width: 8),
@@ -171,7 +170,7 @@ class _DioResponseViewState extends State<DioResponseView> {
           _buildMap(_request.queryParameters),
           _buildMap(_request.data),
           TitleView(title: Text('Response')),
-          _buildMap(widget.data.headers.map),
+          _buildMap(widget.data!.headers.map),
           _buildStatus(),
           SwitchListTile(
             value: _showRawData,

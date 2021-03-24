@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 
 class InfoView extends StatefulWidget {
-  InfoView({Key key}) : super(key: key);
+  InfoView({Key? key}) : super(key: key);
 
   @override
   _InfoViewState createState() => _InfoViewState();
@@ -16,9 +16,9 @@ class InfoView extends StatefulWidget {
 
 class _InfoViewState extends State<InfoView>
     with AutomaticKeepAliveClientMixin {
-  PackageInfo packageInfo;
-  AndroidDeviceInfo androidInfo;
-  IosDeviceInfo iosInfo;
+  PackageInfo? packageInfo;
+  AndroidDeviceInfo? androidInfo;
+  IosDeviceInfo? iosInfo;
 
   Future getAllInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -58,7 +58,7 @@ class _InfoViewState extends State<InfoView>
           children: [
             Text(title),
             AutoSizeText(
-              subTitle ?? '',
+              subTitle,
               style: TextStyle(fontSize: 26),
               maxLines: 2,
             ),
@@ -68,7 +68,7 @@ class _InfoViewState extends State<InfoView>
     );
   }
 
-  _buildTile(String title, String subTitle) {
+  _buildTile(String title, String? subTitle) {
     return DefaultTextStyle(
       style: TextStyle(color: Colors.black),
       child: ListTile(
@@ -93,53 +93,53 @@ class _InfoViewState extends State<InfoView>
   _buildAndroidList() {
     return SliverList(
         delegate: SliverChildListDelegate([
-      _buildTile('androidId', androidInfo.androidId),
-      _buildTile('board', androidInfo.board),
-      _buildTile('bootloader', androidInfo.bootloader),
-      _buildTile('brand', androidInfo.brand),
-      _buildTile('device', androidInfo.device),
-      _buildTile('display', androidInfo.display),
-      _buildTile('fingerprint', androidInfo.fingerprint),
-      _buildTile('hardware', androidInfo.hardware),
-      _buildTile('host', androidInfo.host),
-      _buildTile('id', androidInfo.id),
-      _buildTile('manufacturer', androidInfo.manufacturer),
-      _buildTile('model', androidInfo.model),
-      _buildTile('product', androidInfo.product),
-      _buildTile('tags', androidInfo.tags),
-      _buildTile('type', androidInfo.type),
-      _buildTile('isPhysicalDevice', androidInfo.isPhysicalDevice.toString()),
+      _buildTile('androidId', androidInfo!.androidId),
+      _buildTile('board', androidInfo!.board),
+      _buildTile('bootloader', androidInfo!.bootloader),
+      _buildTile('brand', androidInfo!.brand),
+      _buildTile('device', androidInfo!.device),
+      _buildTile('display', androidInfo!.display),
+      _buildTile('fingerprint', androidInfo!.fingerprint),
+      _buildTile('hardware', androidInfo!.hardware),
+      _buildTile('host', androidInfo!.host),
+      _buildTile('id', androidInfo!.id),
+      _buildTile('manufacturer', androidInfo!.manufacturer),
+      _buildTile('model', androidInfo!.model),
+      _buildTile('product', androidInfo!.product),
+      _buildTile('tags', androidInfo!.tags),
+      _buildTile('type', androidInfo!.type),
+      _buildTile('isPhysicalDevice', androidInfo!.isPhysicalDevice.toString()),
       _buildTile(
-          'supported32BitAbis', androidInfo.supported32BitAbis.join(',')),
+          'supported32BitAbis', androidInfo!.supported32BitAbis.join(',')),
       _buildTile(
-          'supported64BitAbis', androidInfo.supported64BitAbis.join(',')),
-      _buildTile('supportedAbis', androidInfo.supportedAbis.join(',')),
-      _buildTile('baseOS', androidInfo.version.baseOS),
-      _buildTile('codename', androidInfo.version.codename),
-      _buildTile('incremental', androidInfo.version.incremental),
-      _buildTile('release', androidInfo.version.release),
-      _buildTile('securityPatch', androidInfo.version.securityPatch),
-      _buildTile('previewSdkInt', androidInfo.version.previewSdkInt.toString()),
-      _buildTile('sdkInt', androidInfo.version.sdkInt.toString()),
-      _buildTile('systemFeatures', androidInfo.systemFeatures.join('\n')),
+          'supported64BitAbis', androidInfo!.supported64BitAbis.join(',')),
+      _buildTile('supportedAbis', androidInfo!.supportedAbis.join(',')),
+      _buildTile('baseOS', androidInfo!.version.baseOS),
+      _buildTile('codename', androidInfo!.version.codename),
+      _buildTile('incremental', androidInfo!.version.incremental),
+      _buildTile('release', androidInfo!.version.release),
+      _buildTile('securityPatch', androidInfo!.version.securityPatch),
+      _buildTile('previewSdkInt', androidInfo!.version.previewSdkInt.toString()),
+      _buildTile('sdkInt', androidInfo!.version.sdkInt.toString()),
+      _buildTile('systemFeatures', androidInfo!.systemFeatures.join('\n')),
     ]));
   }
 
   _buildIOSList() {
     return SliverList(
         delegate: SliverChildListDelegate([
-      _buildTile('identifierForVendor', iosInfo.identifierForVendor),
-      _buildTile('localizedModel', iosInfo.localizedModel),
-      _buildTile('model', iosInfo.model),
-      _buildTile('name', iosInfo.name),
-      _buildTile('systemName', iosInfo.systemName),
-      _buildTile('systemVersion', iosInfo.systemVersion),
-      _buildTile('isPhysicalDevice', iosInfo.isPhysicalDevice.toString()),
-      _buildTile('machine', iosInfo.utsname.machine),
-      _buildTile('nodename', iosInfo.utsname.nodename),
-      _buildTile('release', iosInfo.utsname.release),
-      _buildTile('sysname', iosInfo.utsname.sysname),
-      _buildTile('version', iosInfo.utsname.version),
+      _buildTile('identifierForVendor', iosInfo!.identifierForVendor),
+      _buildTile('localizedModel', iosInfo!.localizedModel),
+      _buildTile('model', iosInfo!.model),
+      _buildTile('name', iosInfo!.name),
+      _buildTile('systemName', iosInfo!.systemName),
+      _buildTile('systemVersion', iosInfo!.systemVersion),
+      _buildTile('isPhysicalDevice', iosInfo!.isPhysicalDevice.toString()),
+      _buildTile('machine', iosInfo!.utsname.machine),
+      _buildTile('nodename', iosInfo!.utsname.nodename),
+      _buildTile('release', iosInfo!.utsname.release),
+      _buildTile('sysname', iosInfo!.utsname.sysname),
+      _buildTile('version', iosInfo!.utsname.version),
     ]));
   }
 
@@ -171,10 +171,10 @@ class _InfoViewState extends State<InfoView>
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   children: [
-                    _buildGridItem('appName', packageInfo.appName),
-                    _buildGridItem('buildNumber', packageInfo.buildNumber),
-                    _buildGridItem('packageName', packageInfo.packageName),
-                    _buildGridItem('version', packageInfo.version),
+                    _buildGridItem('appName', packageInfo!.appName),
+                    _buildGridItem('buildNumber', packageInfo!.buildNumber),
+                    _buildGridItem('packageName', packageInfo!.packageName),
+                    _buildGridItem('version', packageInfo!.version),
                   ],
                 ),
               ),

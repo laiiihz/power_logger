@@ -13,7 +13,7 @@ class LoggerData {
 
   /// set the logger max number.
   static setMax(int max) {
-    _maxLength = max ?? 100;
+    _maxLength = max;
   }
 
   /// add data to logger
@@ -35,12 +35,12 @@ class LoggerData {
 
   /// add data listener
   static addListener(Function listener) {
-    _listenableData.addListener(listener);
+    _listenableData.addListener(listener as void Function());
   }
 
   /// remove data listener
   static removeListener(Function listener) {
-    _listenableData.removeListener(listener);
+    _listenableData.removeListener(listener as void Function());
   }
 }
 

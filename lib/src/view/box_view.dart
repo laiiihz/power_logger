@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 ///BoxView
 class BoxView extends StatelessWidget {
   final Widget title;
-  final Widget child;
-  final List<Widget> children;
+  final Widget? child;
+  final List<Widget>? children;
   const BoxView({
-    Key key,
+    Key? key,
     this.child,
-    @required this.title,
+    required this.title,
     this.children,
   })  : assert(child != null || children != null),
         super(key: key);
