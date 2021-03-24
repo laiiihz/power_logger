@@ -107,7 +107,7 @@ class _DioResponseViewState extends State<DioResponseView> {
         );
         break;
       case ContentType.IMAGE:
-        return Text("IMAGE");
+        return Image.network(_request.baseUrl + _request.path);
       case ContentType.AUDIO:
         return Text("AUDIO");
       case ContentType.VIDEO:

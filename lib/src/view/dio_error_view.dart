@@ -26,7 +26,7 @@ class _DioErrorViewState extends State<DioErrorView> {
   _buildPath() {
     return BoxView(
       title: const Text('Path'),
-      child: Text(_request.path),
+      child: SelectableText(_request.path),
     );
   }
 
@@ -36,6 +36,13 @@ class _DioErrorViewState extends State<DioErrorView> {
       child: Chip(
         label: Text(widget.data.type.toString()),
       ),
+    );
+  }
+
+  _buildMessage() {
+    return BoxView(
+      title: const Text('Message'),
+      child: Text(widget.data.message ?? ''),
     );
   }
 
@@ -76,6 +83,7 @@ class _DioErrorViewState extends State<DioErrorView> {
           TitleView(title: Text('Request')),
           _buildBaseURL(),
           _buildPath(),
+          _buildMessage(),
           _buildMap(_request.headers),
           _buildMap(_request.queryParameters),
           _buildMap(_request.data),
