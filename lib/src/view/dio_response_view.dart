@@ -5,11 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
+import 'package:power_logger/external_lib/pretty_json.dart';
 import 'package:power_logger/src/parser/dio_parser/dio_parser.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
 import 'package:power_logger/src/view/title_view.dart';
-import 'package:pretty_json/pretty_json.dart';
 
 // enum
 

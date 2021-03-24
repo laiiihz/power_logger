@@ -35,15 +35,14 @@ class _InfoViewState extends State<InfoView>
       elevation: 2,
       onPressed: () {},
       onLongPress: () {
-        Scaffold.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         Clipboard.setData(ClipboardData(text: subTitle));
-        Scaffold.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('已复制'),
           action: SnackBarAction(
             label: '确定',
-            onPressed: () {
-              Scaffold.of(context).hideCurrentSnackBar();
-            },
+            onPressed: () =>
+                ScaffoldMessenger.of(context).hideCurrentSnackBar(),
           ),
         ));
       },
@@ -76,15 +75,14 @@ class _InfoViewState extends State<InfoView>
         title: Text(title),
         subtitle: Text(subTitle ?? ''),
         onLongPress: () {
-          Scaffold.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           Clipboard.setData(ClipboardData(text: subTitle));
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('已复制'),
             action: SnackBarAction(
               label: '确定',
-              onPressed: () {
-                Scaffold.of(context).hideCurrentSnackBar();
-              },
+              onPressed: () =>
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar(),
             ),
           ));
         },
