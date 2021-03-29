@@ -29,18 +29,12 @@ class DioParser {
   /// get dio contentType
   ContentType get type {
     String _ctype = response.headers.map['content-type'].first;
-    switch (_ctype) {
-      case 'text/plain':
-        return ContentType.TEXT_PLAIN;
-      case 'text/html':
-        return ContentType.TEXT_HTML;
-      case 'text/css':
-        return ContentType.TEXT_CSS;
-      case 'text/javascript':
-        return ContentType.TEXT_JS;
-      case 'application/json':
-        return ContentType.JSON;
-    }
+
+    if (_ctype.contains('text/plain')) return ContentType.TEXT_PLAIN;
+    if (_ctype.contains('text/html')) return ContentType.TEXT_HTML;
+    if (_ctype.contains('text/css')) return ContentType.TEXT_CSS;
+    if (_ctype.contains('text/javascript')) return ContentType.TEXT_JS;
+    if (_ctype.contains('application/json')) return ContentType.JSON;
     if (_ctype.contains('image/')) return ContentType.IMAGE;
     if (_ctype.contains('audio/')) return ContentType.AUDIO;
     if (_ctype.contains('video/')) return ContentType.VIDEO;
