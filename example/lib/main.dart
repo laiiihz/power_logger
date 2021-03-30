@@ -10,8 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'PowerLogger\nDemo',
+      home: MyHomePage(title: 'PowerLogger Demo'),
     );
   }
 }
@@ -42,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     LoggerData.addData('TEST');
   }
 
+  bool loading = false;
+
   @override
   void dispose() {
     _textController?.dispose();
@@ -64,10 +66,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          NetTool.dio.get(_textController.text);
-        },
+      floatingActionButton: FloatingActionButton.extended(
+        icon: loading
+            ? CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white))
+            : Icon(Icons.send),
+        label: Text('发送'),
+        onPressed: loading
+            ? null
+            : () async {
+                loading = true;
+                setState(() {});
+                await NetTool.dio.get(_textController.text);
+                loading = false;
+                setState(() {});
+              },
       ),
     );
   }
