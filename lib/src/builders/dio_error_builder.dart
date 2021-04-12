@@ -23,7 +23,7 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
       case DioErrorType.receiveTimeout:
         return '接收超时';
       case DioErrorType.response:
-        return 'Serve Side Error';
+        return '服务端错误';
       case DioErrorType.cancel:
         return '取消连接';
       case DioErrorType.other:
