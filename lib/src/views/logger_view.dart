@@ -3,7 +3,7 @@ import 'package:power_logger/src/data/logger_data.dart';
 import 'package:power_logger/src/parser/data_parser.dart';
 
 class LoggerView extends StatefulWidget {
-  LoggerView({Key key}) : super(key: key);
+  LoggerView({Key? key}) : super(key: key);
 
   @override
   _LoggerViewState createState() => _LoggerViewState();

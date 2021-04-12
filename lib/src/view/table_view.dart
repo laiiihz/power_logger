@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TableView extends StatelessWidget {
-  final Map map;
-  const TableView({Key key, @required this.map}) : super(key: key);
+  final Map? map;
+  const TableView({Key? key, required this.map}) : super(key: key);
   Widget _buildTableTitle(String title) {
     return Padding(
       padding: EdgeInsets.all(5),

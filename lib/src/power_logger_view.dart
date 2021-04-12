@@ -6,7 +6,7 @@ import 'package:power_logger/src/views/settings_view.dart';
 
 ///Logger view
 class PowerLoggerView extends StatefulWidget {
-  PowerLoggerView({Key key}) : super(key: key);
+  PowerLoggerView({Key? key}) : super(key: key);
 
   @override
   _PowerLoggerViewState createState() => _PowerLoggerViewState();
@@ -15,7 +15,7 @@ class PowerLoggerView extends StatefulWidget {
 class _PowerLoggerViewState extends State<PowerLoggerView> {
   PageController _pageController = PageController();
   int _currentIndex = 0;
-  void Function(void Function()) _setState;
+  void Function(void Function())? _setState;
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -37,7 +37,7 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
           controller: _pageController,
           onPageChanged: (index) {
             _currentIndex = index;
-            if (_setState != null) _setState(() {});
+            if (_setState != null) _setState!(() {});
           },
           children: [
             LoggerView(),

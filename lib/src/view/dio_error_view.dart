@@ -6,7 +6,7 @@ import 'package:power_logger/src/view/title_view.dart';
 
 class DioErrorView extends StatefulWidget {
   final DioError data;
-  DioErrorView({Key key, @required this.data}) : super(key: key);
+  DioErrorView({Key? key, required this.data}) : super(key: key);
 
   @override
   _DioErrorViewState createState() => _DioErrorViewState();
@@ -15,7 +15,7 @@ class DioErrorView extends StatefulWidget {
 class _DioErrorViewState extends State<DioErrorView> {
   RequestOptions get _request => widget.data.requestOptions;
   _buildBaseURL() {
-    return _request.baseUrl == null || _request.baseUrl.length == 0
+    return _request.baseUrl.length == 0
         ? const SizedBox()
         : BoxView(
             title: Text('BaseURL'),
@@ -26,7 +26,7 @@ class _DioErrorViewState extends State<DioErrorView> {
   _buildPath() {
     return BoxView(
       title: const Text('Path'),
-      child: Text(_request.path),
+      child: SelectableText(_request.path),
     );
   }
 
@@ -36,6 +36,13 @@ class _DioErrorViewState extends State<DioErrorView> {
       child: Chip(
         label: Text(widget.data.type.toString()),
       ),
+    );
+  }
+
+  _buildMessage() {
+    return BoxView(
+      title: const Text('Message'),
+      child: Text(widget.data.message),
     );
   }
 
@@ -76,6 +83,7 @@ class _DioErrorViewState extends State<DioErrorView> {
           TitleView(title: Text('Request')),
           _buildBaseURL(),
           _buildPath(),
+          _buildMessage(),
           _buildMap(_request.headers),
           _buildMap(_request.queryParameters),
           _buildMap(_request.data),

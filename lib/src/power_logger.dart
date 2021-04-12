@@ -26,14 +26,14 @@ class PowerLogger {
   ///PowerLogger.start(context,debug:true);
   ///```
   static start(BuildContext context, {bool debug = true}) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       PowerLogger.debug = debug;
       if (debug) _insertToOverlay(context);
     });
   }
 
   static _insertToOverlay(BuildContext context) {
-    Overlay.of(context).insert(OverlayEntry(
+    Overlay.of(context)!.insert(OverlayEntry(
       builder: (context) {
         return LoggerFab();
       },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TitleView extends StatelessWidget {
   final Widget title;
-  const TitleView({Key key, @required this.title}) : super(key: key);
+  const TitleView({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
