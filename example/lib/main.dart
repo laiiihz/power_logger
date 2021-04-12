@@ -10,8 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'PowerLogger\nDemo',
+      home: MyHomePage(title: 'PowerLogger Demo'),
     );
   }
 }
@@ -25,6 +25,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _textController =
+      TextEditingController(text: 'https://');
   @override
   void initState() {
     super.initState();
@@ -32,15 +34,20 @@ class _MyHomePageState extends State<MyHomePage> {
     NetTool.dio.get("https://192.168.31.255:8888");
     NetTool.dio.get("https://www.baidu.com", queryParameters: {'test': 'test'});
     NetTool.dio.get("https://www.baidu.com/ahefbawfbe.html");
-    NetTool.dio.post(
-      "https://www.baidu.com/ahefbawfbe.html",
-      data: FormData.fromMap({'test': 'test'}),
-    );
-
+    NetTool.dio.post("https://www.baidu.com/ahefbawfbe.html",
+        data: FormData.fromMap({'test': 'test'}));
     NetTool.dio.get(
         "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
     PowerLogger.start(context);
     LoggerData.addData('TEST');
+  }
+
+  bool loading = false;
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,10 +56,31 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          NetTool.dio.get("https://www.baidu.com");
-        },
+      body: Container(
+        padding: EdgeInsets.all(10),
+        alignment: Alignment.center,
+        child: TextField(
+          controller: _textController,
+          decoration: InputDecoration(
+            filled: true,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: loading
+            ? CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white))
+            : Icon(Icons.send),
+        label: Text('发送'),
+        onPressed: loading
+            ? null
+            : () async {
+                loading = true;
+                setState(() {});
+                await NetTool.dio.get(_textController.text);
+                loading = false;
+                setState(() {});
+              },
       ),
     );
   }
