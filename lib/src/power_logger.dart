@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:power_logger/src/widgets/logger_fab.dart';
 
 class PowerLogger {
   /// debug tag
   static bool debug = true;
-
-  static OverlayEntry? entry;
-
-  static late BuildContext globalContext;
 
   ///初始化
   ///
@@ -19,8 +16,7 @@ class PowerLogger {
   @Deprecated("use PowerLogger.start")
   static init(BuildContext context, {bool debug = true}) {
     PowerLogger.debug = debug;
-    globalContext = context;
-    if (debug) if (debug) _insertToOverlay();
+    if (debug) if (debug) _insertToOverlay(context);
   }
 
   ///初始化
@@ -35,28 +31,20 @@ class PowerLogger {
     bool debug = true,
     Alignment initAlignment = Alignment.center,
   }) {
-    globalContext = context;
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      PowerLogger.debug = debug;
-      if (debug) _insertToOverlay(initAlignment: initAlignment);
+    PowerLogger.debug = debug;
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      if (debug) _insertToOverlay(context, initAlignment: initAlignment);
     });
   }
 
-  static _insertToOverlay({Alignment initAlignment = Alignment.center}) {
-    entry = OverlayEntry(
+  static _insertToOverlay(
+    BuildContext context, {
+    Alignment initAlignment = Alignment.center,
+  }) {
+    Overlay.of(context)!.insert(OverlayEntry(
       builder: (context) {
         return LoggerFab(initAlignment: initAlignment);
       },
-    );
-    Overlay.of(globalContext)!.insert(entry!);
-  }
-
-  static insertToOverlay({Alignment initAlignment = Alignment.center}) =>
-      _insertToOverlay(
-        initAlignment: initAlignment,
-      );
-
-  static removeFromOverlay() {
-    if (entry != null) entry!.remove();
+    ));
   }
 }

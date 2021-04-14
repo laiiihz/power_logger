@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             : () async {
                 loading = true;
                 setState(() {});
-                await NetTool.dio.get(_textController.text).catchError((e) {});
+                await NetTool.dio.get(_textController.text).catchError((_) {});
                 loading = false;
                 setState(() {});
               },

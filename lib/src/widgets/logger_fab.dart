@@ -21,6 +21,8 @@ class LoggerFabState extends State<LoggerFab>
       const SpringDescription(mass: 15, stiffness: 1000, damping: 0.7);
   Alignment get alignment => _dragAlignment;
 
+  bool opened = false;
+
   double _normalizeVelocity(Offset velocity, Size size) {
     final normalizedVelocity = Offset(
       velocity.dx / size.width,
@@ -78,13 +80,17 @@ class LoggerFabState extends State<LoggerFab>
         onPanEnd: (details) =>
             _runAnimation(details.velocity.pixelsPerSecond, size),
         onTap: () async {
-          Alignment initAlignment = _dragAlignment;
-          PowerLogger.removeFromOverlay();
-          await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PowerLoggerView()),
-          );
-          PowerLogger.insertToOverlay(initAlignment: initAlignment);
+          if (!opened) {
+            opened = true;
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PowerLoggerView()),
+            );
+            opened = false;
+          } else {
+            opened = false;
+            Navigator.pop(context);
+          }
         },
         child: const _FabButton(),
       ),
