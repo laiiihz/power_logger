@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     NetTool.dio.get(
         "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
     PowerLogger.start(context);
-    LoggerData.addData('TEST');
+    LoggerData.addData('TEST', tag: 'TAG');
   }
 
   bool loading = false;
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             : () async {
                 loading = true;
                 setState(() {});
-                await NetTool.dio.get(_textController.text);
+                await NetTool.dio.get(_textController.text).catchError((e) {});
                 loading = false;
                 setState(() {});
               },

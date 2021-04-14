@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 /// UnfocusParser
 class UnfocusParser extends StatelessWidget {
   final dynamic data;
-  const UnfocusParser({Key? key, required this.data}) : super(key: key);
+  final String? tag;
+  const UnfocusParser({Key? key, required this.data, this.tag})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class UnfocusParser extends StatelessWidget {
           maxLines: 1,
         ),
         trailing: Chip(
-          label: Text(data.runtimeType.toString()),
+          label: Text(tag ?? data.runtimeType.toString()),
         ),
       ),
     );

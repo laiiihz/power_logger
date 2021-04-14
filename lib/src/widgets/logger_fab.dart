@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:power_logger/power_logger.dart';
 import 'package:power_logger/src/power_logger_view.dart';
 
 class LoggerFab extends StatefulWidget {
-  LoggerFab({Key? key}) : super(key: key);
+  final Alignment initAlignment;
+  LoggerFab({Key? key, this.initAlignment = Alignment.center})
+      : super(key: key);
 
   @override
-  _LoggerFabState createState() => _LoggerFabState();
+  LoggerFabState createState() => LoggerFabState();
 }
 
-class _LoggerFabState extends State<LoggerFab>
+class LoggerFabState extends State<LoggerFab>
     with SingleTickerProviderStateMixin {
-  bool showSubPage = false;
   AnimationController? _animationController;
-  var _dragAlignment = Alignment.center;
+  late Alignment _dragAlignment;
   late Animation<Alignment> _animation;
   final _spring =
       const SpringDescription(mass: 15, stiffness: 1000, damping: 0.7);
+  Alignment get alignment => _dragAlignment;
 
   double _normalizeVelocity(Offset velocity, Size size) {
     final normalizedVelocity = Offset(
@@ -50,6 +53,7 @@ class _LoggerFabState extends State<LoggerFab>
   @override
   void initState() {
     super.initState();
+    _dragAlignment = widget.initAlignment;
     _animationController = AnimationController.unbounded(vsync: this)
       ..addListener(() => setState(() => _dragAlignment = _animation.value));
   }
@@ -65,29 +69,24 @@ class _LoggerFabState extends State<LoggerFab>
     final size = MediaQuery.of(context).size;
     return Align(
       alignment: _dragAlignment,
-      child: AnimatedOpacity(
-        duration: Duration(milliseconds: 300),
-        opacity: showSubPage ? 0 : 1,
-        child: GestureDetector(
-          onPanStart: (details) => _animationController!.stop(canceled: true),
-          onPanUpdate: (details) => setState(() => _dragAlignment += Alignment(
-                details.delta.dx / (size.width / 2),
-                details.delta.dy / (size.height / 2),
-              )),
-          onPanEnd: (details) =>
-              _runAnimation(details.velocity.pixelsPerSecond, size),
-          onTap: showSubPage
-              ? null
-              : () async {
-                  showSubPage = true;
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PowerLoggerView()),
-                  );
-                  showSubPage = false;
-                },
-          child: const _FabButton(),
-        ),
+      child: GestureDetector(
+        onPanStart: (details) => _animationController!.stop(canceled: true),
+        onPanUpdate: (details) => setState(() => _dragAlignment += Alignment(
+              details.delta.dx / (size.width / 2),
+              details.delta.dy / (size.height / 2),
+            )),
+        onPanEnd: (details) =>
+            _runAnimation(details.velocity.pixelsPerSecond, size),
+        onTap: () async {
+          Alignment initAlignment = _dragAlignment;
+          PowerLogger.removeFromOverlay();
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PowerLoggerView()),
+          );
+          PowerLogger.insertToOverlay(initAlignment: initAlignment);
+        },
+        child: const _FabButton(),
       ),
     );
   }

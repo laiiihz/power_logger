@@ -119,7 +119,8 @@ class _InfoViewState extends State<InfoView>
       _buildTile('incremental', androidInfo!.version.incremental),
       _buildTile('release', androidInfo!.version.release),
       _buildTile('securityPatch', androidInfo!.version.securityPatch),
-      _buildTile('previewSdkInt', androidInfo!.version.previewSdkInt.toString()),
+      _buildTile(
+          'previewSdkInt', androidInfo!.version.previewSdkInt.toString()),
       _buildTile('sdkInt', androidInfo!.version.sdkInt.toString()),
       _buildTile('systemFeatures', androidInfo!.systemFeatures.join('\n')),
     ]));

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+
 import 'package:power_logger/power_logger.dart';
 
 /// logger data storage
@@ -15,10 +16,10 @@ class LoggerData {
   static Logger _logger = Logger();
 
   /// the real logger data.
-  static List<dynamic> get data => _listenableData.value;
+  static List<LoggerInnerData> get data => _listenableData.value;
 
-  static _LoggerDataNotifer<List<dynamic>> _listenableData =
-      _LoggerDataNotifer([]);
+  static _LoggerDataNotifer<List<LoggerInnerData>> _listenableData =
+      _LoggerDataNotifer<List<LoggerInnerData>>([]);
 
   /// set the logger max number.
   static setMax(int max) {
@@ -26,14 +27,20 @@ class LoggerData {
   }
 
   /// add data to logger
-  static addData(dynamic data) {
+  static addData(dynamic data, {String? tag}) {
     if (PowerLogger.debug) {
       if (_listenableData.value.length < _maxLength) {
-        _listenableData.value.insert(0, data);
+        _listenableData.value.insert(
+          0,
+          LoggerInnerData(rawData: data, date: DateTime.now(), tag: tag),
+        );
         _listenableData.notify();
       } else {
         _listenableData.value.removeLast();
-        _listenableData.value.insert(0, data);
+        _listenableData.value.insert(
+          0,
+          LoggerInnerData(rawData: data, date: DateTime.now(), tag: tag),
+        );
         _listenableData.notify();
       }
     }
@@ -56,6 +63,17 @@ class LoggerData {
 }
 
 class _LoggerDataNotifer<T> extends ValueNotifier {
-  _LoggerDataNotifer(value) : super(value);
+  _LoggerDataNotifer(T value) : super(value);
   notify() => this.notifyListeners();
+}
+
+class LoggerInnerData {
+  final dynamic? rawData;
+  final DateTime date;
+  final String? tag;
+  LoggerInnerData({
+    required this.rawData,
+    required this.date,
+    this.tag,
+  });
 }

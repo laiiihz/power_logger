@@ -5,7 +5,9 @@ import 'package:power_logger/src/view/dio_response_view.dart';
 /// Dio Response Builder
 class DioResponseBuilder extends StatefulWidget {
   final Response data;
-  DioResponseBuilder({Key? key,required this.data}) : super(key: key);
+  final DateTime date;
+  DioResponseBuilder({Key? key, required this.data, required this.date})
+      : super(key: key);
 
   @override
   _DioResponseBuilderState createState() => _DioResponseBuilderState();
@@ -32,6 +34,7 @@ class _DioResponseBuilderState extends State<DioResponseBuilder> {
             color: Colors.black87,
           ),
         ),
+        subtitle: Text(widget.date.toString()),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

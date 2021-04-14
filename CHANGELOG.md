@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [1.1.0]
+
+* performance enhanced.
+* add initAlignment.
+
 ## [1.0.1-nullsafety.1]
 
 * add logger.

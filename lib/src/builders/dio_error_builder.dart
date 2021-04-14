@@ -5,7 +5,9 @@ import 'package:power_logger/src/view/dio_error_view.dart';
 ///Dio Error builder
 class DioErrorBuilder extends StatefulWidget {
   final DioError data;
-  DioErrorBuilder({Key? key, required this.data}) : super(key: key);
+  final DateTime date;
+  DioErrorBuilder({Key? key, required this.data, required this.date})
+      : super(key: key);
 
   @override
   _DioErrorBuilderState createState() => _DioErrorBuilderState();
@@ -54,7 +56,7 @@ class _DioErrorBuilderState extends State<DioErrorBuilder> {
               ),
             ),
             subtitle: Text(
-              widget.data.message,
+              '${widget.data.message}\n${widget.date}',
               style: TextStyle(
                 color: Colors.black45,
                 fontWeight: FontWeight.w300,
