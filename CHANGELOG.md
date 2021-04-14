@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.1.0]
+## [1.1.0-nullsafety.2]
 
 * performance enhanced.
 * add initAlignment.
