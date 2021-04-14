@@ -35,9 +35,9 @@ class PowerLogger {
     bool debug = true,
     Alignment initAlignment = Alignment.center,
   }) {
+    globalContext = context;
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       PowerLogger.debug = debug;
-      globalContext = context;
       if (debug) _insertToOverlay(initAlignment: initAlignment);
     });
   }
