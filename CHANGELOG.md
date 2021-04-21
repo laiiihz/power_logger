@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.2.0]
+
+* add flutterError view
+
 ## [1.1.1-nullsafety.3]
 
 * fix context error.

@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (details) {
+    LoggerData.addData(details);
+    FlutterError.presentError(details);
+  };
   runApp(MyApp());
 }
 
@@ -44,6 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool loading = false;
 
+  String? nullableValue;
+
   @override
   void dispose() {
     _textController.dispose();
@@ -56,15 +63,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        alignment: Alignment.center,
-        child: TextField(
-          controller: _textController,
-          decoration: InputDecoration(
-            filled: true,
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Text(nullableValue!)),
+              );
+            },
+            child: Text('FAIL PAGE'),
           ),
-        ),
+          TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+              filled: true,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: loading

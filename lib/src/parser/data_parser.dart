@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 import 'package:power_logger/src/builders/dio_responses_builder.dart';
 import 'package:power_logger/src/builders/dio_error_builder.dart';
+import 'package:power_logger/src/builders/flutter_error_builder.dart';
 import 'package:power_logger/src/parser/unfocus_parser.dart';
 
 ///LoggerDataParser
@@ -18,6 +19,8 @@ class LoggerDataParser {
         data: data.rawData,
         date: data.date,
       );
+    if (data.rawData is FlutterErrorDetails)
+      return FlutterErrorBuilder(details: data.rawData);
     return UnfocusParser(data: data.rawData, tag: data.tag);
   }
 }
