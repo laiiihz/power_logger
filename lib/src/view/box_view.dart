@@ -21,20 +21,12 @@ class BoxView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black87,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.caption!,
             child: title,
           ),
           child == null ? SizedBox() : SizedBox(height: 10),
           DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black87,
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.bodyText2!,
             child: child ?? SizedBox(),
           ),
           children == null ? SizedBox() : SizedBox(height: 10),

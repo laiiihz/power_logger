@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:power_logger/external_lib/pretty_json.dart';
 import 'package:power_logger/src/parser/dio_parser/dio_parser.dart';
@@ -79,7 +80,9 @@ class _DioResponseViewState extends State<DioResponseView> {
           child: HighlightView(
             widget.data!.data,
             language: _dioParser.highlight,
-            theme: atomOneLightTheme,
+            theme: Theme.of(context).brightness == Brightness.light
+                ? atomOneLightTheme
+                : atomOneDarkTheme,
           ),
         );
       case ContentType.JSON:

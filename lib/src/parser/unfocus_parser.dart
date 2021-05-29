@@ -10,7 +10,9 @@ class UnfocusParser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).brightness == Brightness.light
+          ? Colors.black12
+          : Colors.white10,
       child: ListTile(
         onTap: () => Navigator.push(
           context,

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:power_logger/src/view/box_view.dart';
 import 'package:power_logger/src/view/table_view.dart';
@@ -67,12 +68,14 @@ class _DioErrorViewState extends State<DioErrorView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[600],
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.red[100]
+            : Colors.red[900],
         title: Text(widget.data.requestOptions.path),
         actions: [
           Chip(
             label: Text(widget.data.requestOptions.method),
-            backgroundColor: Colors.lightGreen,
+            backgroundColor: Colors.lightGreen.withOpacity(0.5),
           ),
           SizedBox(width: 8),
         ],

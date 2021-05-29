@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide AndroidView;
-import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:power_logger/src/views/platform_specific/_android_view.dart';
 import 'package:power_logger/src/views/platform_specific/_ios_view.dart';
@@ -74,7 +72,7 @@ class _InfoViewState extends State<InfoView>
                   delegate: SliverChildListDelegate([
                 ListTile(
                   title: Text('Package Info'),
-                  tileColor: Colors.lightBlueAccent[100],
+                  tileColor: Theme.of(context).accentColor.withOpacity(0.2),
                 ),
                 InfoTile(title: 'appName', subTitle: packageInfo!.appName),
                 InfoTile(
@@ -84,7 +82,7 @@ class _InfoViewState extends State<InfoView>
                 InfoTile(title: 'version', subTitle: packageInfo!.version),
                 ListTile(
                   title: Text('Device Info'),
-                  tileColor: Colors.lightBlueAccent[100],
+                  tileColor: Theme.of(context).accentColor.withOpacity(0.1),
                 ),
               ])),
               _buildView(),

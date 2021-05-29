@@ -18,59 +18,59 @@ class _PowerLoggerViewState extends State<PowerLoggerView> {
   void Function(void Function())? _setState;
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData.light(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Logger View'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.clear_all_rounded),
-              onPressed: () {
-                LoggerData.clear();
-                setState(() {});
-              },
-            ),
-          ],
-        ),
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            _currentIndex = index;
-            if (_setState != null) _setState!(() {});
-          },
-          children: [
-            LoggerView(),
-            InfoView(),
-            SettingsView(),
-          ],
-        ),
-        bottomNavigationBar: StatefulBuilder(
-          builder: (context, kSetState) {
-            _setState = kSetState;
-            return BottomNavigationBar(
-              currentIndex: _currentIndex,
-              backgroundColor: Colors.white,
-              onTap: (index) {
-                _currentIndex = index;
-                kSetState(() {});
-                _pageController.animateToPage(
-                  index,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOutCubic,
-                );
-              },
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.assessment), label: '日志'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.perm_device_information), label: '信息'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings), label: '设置'),
-              ],
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Logger View'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.clear_all_rounded),
+            onPressed: () {
+              LoggerData.clear();
+              setState(() {});
+            },
+          ),
+        ],
+      ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          _currentIndex = index;
+          if (_setState != null) _setState!(() {});
+        },
+        children: [
+          LoggerView(),
+          InfoView(),
+          SettingsView(),
+        ],
+      ),
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, kSetState) {
+          _setState = kSetState;
+          return BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              _currentIndex = index;
+              kSetState(() {});
+              _pageController.animateToPage(
+                index,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOutCubic,
+              );
+            },
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assessment), label: 'Log'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.perm_device_information),
+                label: 'Info',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
+            ],
+          );
+        },
       ),
     );
   }

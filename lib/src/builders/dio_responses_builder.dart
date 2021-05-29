@@ -18,12 +18,7 @@ class DioResponseBuilder extends StatelessWidget {
           builder: (context) => DioResponseView(data: data),
         ),
       ),
-      title: Text(
-        data.requestOptions.path,
-        style: TextStyle(
-          color: Colors.black87,
-        ),
-      ),
+      title: Text(data.requestOptions.path),
       subtitle: Text(date.toString()),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PowerLogger\nDemo',
       home: MyHomePage(title: 'PowerLogger Demo'),
+      theme: ThemeData.dark(),
     );
   }
 }

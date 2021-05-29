@@ -21,24 +21,13 @@ class DioErrorBuilder extends StatelessWidget {
           ),
         );
       },
-      title: Text(
-        data.requestOptions.path,
-        style: TextStyle(
-          color: Colors.black87,
-        ),
-      ),
-      subtitle: Text(
-        '${data.message}\n$date',
-        style: TextStyle(
-          color: Colors.black45,
-          fontWeight: FontWeight.w300,
-        ),
-      ),
+      title: Text(data.requestOptions.path),
+      subtitle: Text('${data.message}\n$date'),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Chip(
-            backgroundColor: Colors.blue.withOpacity(0.8),
+            backgroundColor: Colors.blue.withOpacity(0.4),
             label: Text(data.requestOptions.method),
           ),
         ],
