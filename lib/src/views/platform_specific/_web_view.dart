@@ -14,15 +14,15 @@ class WebDeviceView extends StatelessWidget {
         [
           InfoTile(
             title: 'appCodeName',
-            subTitle: webInfo!.appCodeName,
+            subTitle: webInfo!.appCodeName ?? '',
           ),
           InfoTile(
             title: 'appName',
-            subTitle: webInfo!.appName,
+            subTitle: webInfo!.appName ?? '',
           ),
           InfoTile(
             title: 'appVersion',
-            subTitle: webInfo!.appVersion,
+            subTitle: webInfo!.appVersion ?? '',
           ),
           InfoTile(
             title: 'browserName',
@@ -38,11 +38,11 @@ class WebDeviceView extends StatelessWidget {
           ),
           InfoTile(
             title: 'language',
-            subTitle: webInfo!.language,
+            subTitle: webInfo!.language ?? '',
           ),
           InfoTile(
             title: 'languages',
-            subTitle: webInfo!.languages.join(','),
+            subTitle: webInfo!.languages?.join(',') ?? '',
           ),
           InfoTile(
             title: 'maxTouchPoints',
@@ -50,27 +50,27 @@ class WebDeviceView extends StatelessWidget {
           ),
           InfoTile(
             title: 'platform',
-            subTitle: webInfo!.platform,
+            subTitle: webInfo!.platform ?? '',
           ),
           InfoTile(
             title: 'product',
-            subTitle: webInfo!.product,
+            subTitle: webInfo!.product ?? '',
           ),
           InfoTile(
             title: 'productSub',
-            subTitle: webInfo!.productSub,
+            subTitle: webInfo!.productSub ?? '',
           ),
           InfoTile(
             title: 'userAgent',
-            subTitle: webInfo!.userAgent,
+            subTitle: webInfo!.userAgent ?? '',
           ),
           InfoTile(
             title: 'vendor',
-            subTitle: webInfo!.vendor,
+            subTitle: webInfo!.vendor ?? '',
           ),
           InfoTile(
             title: 'vendorSub',
-            subTitle: webInfo!.vendorSub,
+            subTitle: webInfo!.vendorSub ?? '',
           ),
         ],
       ),
