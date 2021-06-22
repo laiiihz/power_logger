@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.2.2]
+
+* update dependencies to latest.
+
 ## [1.2.1]
 
 * support macos,linux,windows & web platform.

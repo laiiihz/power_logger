@@ -22,6 +22,10 @@ LoggerData.addData(data);
 
 * flutter SDK >= 2.0.0
 
+## ROADMAP
+
+- [ ] support dart native request.
+
 ## author
 
 [laiiihz](https://github.com/laiiihz)
